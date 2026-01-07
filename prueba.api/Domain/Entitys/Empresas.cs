@@ -1,0 +1,91 @@
+namespace Prueba.Domain;
+public class Empresa
+{
+    public Guid Id { get; private set; }
+    public string Nit { get; private set; }
+    public string RazonSocial { get; private set; }
+    public string NombreComercial { get; private set; }
+    public string Telefono { get; private set; }
+    public string CorreoElectronico { get; private set; }
+    public Guid MunicipioId { get; private set; }
+
+    private readonly List<ColaboradorEmpresa> _colaboradores;
+    public IReadOnlyCollection<ColaboradorEmpresa> Colaboradores => _colaboradores;
+
+    private Empresa() { }
+
+    public Empresa(
+        string nit,
+        string razonSocial,
+        string nombreComercial,
+        string telefono,
+        string correoElectronico,
+        Guid municipioId)
+    {
+        Id = Guid.NewGuid();
+        CambiarNit(nit);
+        CambiarRazonSocial(razonSocial);
+        CambiarNombreComercial(nombreComercial);
+        CambiarTelefono(telefono);
+        CambiarCorreo(correoElectronico);
+        CambiarMunicipio(municipioId);
+
+        _colaboradores = new List<ColaboradorEmpresa>();
+    }
+
+    public void AsignarColaborador(Guid colaboradorId)
+    {
+        if (_colaboradores.Any(c => c.ColaboradorId == colaboradorId))
+            throw new InvalidOperationException("El colaborador ya está asignado a esta empresa");
+
+        _colaboradores.Add(new ColaboradorEmpresa(colaboradorId, Id));
+    }
+
+    private void CambiarNit(string nit)
+    {
+        if (string.IsNullOrWhiteSpace(nit))
+            throw new ArgumentException("El NIT es obligatorio");
+
+        Nit = nit.Trim();
+    }
+
+    private void CambiarRazonSocial(string razonSocial)
+    {
+        if (string.IsNullOrWhiteSpace(razonSocial))
+            throw new ArgumentException("La razón social es obligatoria");
+
+        RazonSocial = razonSocial.Trim();
+    }
+
+    private void CambiarNombreComercial(string nombre)
+    {
+        if (string.IsNullOrWhiteSpace(nombre))
+            throw new ArgumentException("El nombre comercial es obligatorio");
+
+        NombreComercial = nombre.Trim();
+    }
+
+    private void CambiarTelefono(string telefono)
+    {
+        if (string.IsNullOrWhiteSpace(telefono))
+            throw new ArgumentException("El teléfono es obligatorio");
+
+        Telefono = telefono.Trim();
+    }
+
+    private void CambiarCorreo(string correo)
+    {
+        if (string.IsNullOrWhiteSpace(correo) || !correo.Contains("@"))
+            throw new ArgumentException("Correo electrónico inválido");
+
+        CorreoElectronico = correo.Trim();
+    }
+
+    private void CambiarMunicipio(Guid municipioId)
+    {
+        if (municipioId == Guid.Empty)
+            throw new ArgumentException("El municipio es obligatorio");
+
+        MunicipioId = municipioId;
+    }
+}
