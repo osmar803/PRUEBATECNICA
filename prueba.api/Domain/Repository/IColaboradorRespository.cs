@@ -1,4 +1,6 @@
  using Prueba.Domain;
+ namespace Domain.repository;
+
 public interface IColaboradorRepository
 {
     Task<Colaborador?> ObtenerPorIdAsync(Guid id);

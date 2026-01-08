@@ -43,7 +43,7 @@ public class Empresa
         _colaboradores.Add(new ColaboradorEmpresa(colaboradorId, Id));
     }
 
-    private void CambiarNit(string nit)
+    public void CambiarNit(string nit)
     {
         if (string.IsNullOrWhiteSpace(nit))
             throw new ReglaNegocioException("El NIT es obligatorio");
@@ -51,7 +51,7 @@ public class Empresa
         Nit = nit.Trim();
     }
 
-    private void CambiarRazonSocial(string razonSocial)
+    public void CambiarRazonSocial(string razonSocial)
     {
         if (string.IsNullOrWhiteSpace(razonSocial))
             throw new ReglaNegocioException("La razón social es obligatoria");
@@ -59,7 +59,7 @@ public class Empresa
         RazonSocial = razonSocial.Trim();
     }
 
-    private void CambiarNombreComercial(string nombre)
+    public void CambiarNombreComercial(string nombre)
     {
         if (string.IsNullOrWhiteSpace(nombre))
             throw new ReglaNegocioException("El nombre comercial es obligatorio");
@@ -67,7 +67,7 @@ public class Empresa
         NombreComercial = nombre.Trim();
     }
 
-    private void CambiarTelefono(string telefono)
+    public void CambiarTelefono(string telefono)
     {
         if (string.IsNullOrWhiteSpace(telefono))
             throw new ReglaNegocioException("El teléfono es obligatorio");
@@ -75,7 +75,7 @@ public class Empresa
         Telefono = telefono.Trim();
     }
 
-    private void CambiarCorreo(string correo)
+    public void CambiarCorreo(string correo)
     {
         if (string.IsNullOrWhiteSpace(correo) || !correo.Contains("@"))
             throw new ReglaNegocioException("Correo electrónico inválido");
@@ -83,7 +83,7 @@ public class Empresa
         CorreoElectronico = correo.Trim();
     }
 
-    private void CambiarMunicipio(Guid municipioId)
+    public void CambiarMunicipio(Guid municipioId)
     {
         if (municipioId == Guid.Empty)
             throw new ReglaNegocioException("El municipio es obligatorio");

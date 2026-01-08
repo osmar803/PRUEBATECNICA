@@ -1,11 +1,12 @@
 using Prueba.Domain;
+namespace Domain.repository;
 public interface IPaisRepository
 {
     Task<Pais?> ObtenerPorIdAsync(Guid id);
     Task<Pais?> ObtenerPorNombreAsync(string nombre);
     Task<List<Pais>> ObtenerTodosAsync();
 
-    Task AgregarAsync(Pais pais);
+    Task CrearAsync(Pais pais);
     Task ActualizarAsync(Pais pais);
-    Task EliminarAsync(Guid id);
+    Task EliminarAsync(Pais pais);
 }

@@ -1,4 +1,5 @@
  using Prueba.Domain;
+ namespace Domain.repository;
 public interface IUsuarioAdministradorRepository
 {
     Task<UsuarioAdministrador?> ObtenerPorUsuarioAsync(string usuario);

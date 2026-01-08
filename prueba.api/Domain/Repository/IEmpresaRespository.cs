@@ -1,4 +1,5 @@
  using Prueba.Domain;
+ namespace Domain.repository;
 public interface IEmpresaRepository
 {
     Task<Empresa?> ObtenerPorIdAsync(Guid id);

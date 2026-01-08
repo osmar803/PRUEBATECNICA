@@ -23,7 +23,7 @@ public class Departamento
         Nombre = nombre.Trim();
     }
 
-    private void CambiarPais(Guid paisId)
+    public void CambiarPais(Guid paisId)
     {
         if (paisId == Guid.Empty)
             throw new ReglaNegocioException("El país es obligatorio");
