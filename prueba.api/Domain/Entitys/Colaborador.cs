@@ -1,3 +1,4 @@
+using Prueba.Domain.Exceptions;
 namespace Prueba.Domain;
 public class Colaborador
 {
@@ -23,10 +24,10 @@ public class Colaborador
         _empresas = new List<ColaboradorEmpresa>();
     }
 
-    public void AsignarEmpresa(Guid empresaId)
+   public void AsignarEmpresa(Guid empresaId)
     {
         if (_empresas.Any(e => e.EmpresaId == empresaId))
-            throw new InvalidOperationException("El colaborador ya pertenece a esta empresa");
+            throw new ConflictoDominioException("El colaborador ya pertenece a esta empresa");
 
         _empresas.Add(new ColaboradorEmpresa(Id, empresaId));
     }
@@ -34,7 +35,7 @@ public class Colaborador
     private void CambiarNombre(string nombre)
     {
         if (string.IsNullOrWhiteSpace(nombre))
-            throw new ArgumentException("El nombre completo es obligatorio");
+            throw new ReglaNegocioException("El nombre completo es obligatorio");
 
         NombreCompleto = nombre.Trim();
     }
@@ -42,7 +43,7 @@ public class Colaborador
     private void CambiarEdad(int edad)
     {
         if (edad < 18)
-            throw new ArgumentException("El colaborador debe ser mayor de edad");
+            throw new ReglaNegocioException("El colaborador debe ser mayor de edad");
 
         Edad = edad;
     }
@@ -50,7 +51,7 @@ public class Colaborador
     private void CambiarTelefono(string telefono)
     {
         if (string.IsNullOrWhiteSpace(telefono))
-            throw new ArgumentException("El teléfono es obligatorio");
+            throw new ReglaNegocioException("El teléfono es obligatorio");
 
         Telefono = telefono.Trim();
     }
@@ -58,7 +59,7 @@ public class Colaborador
     private void CambiarCorreo(string correo)
     {
         if (string.IsNullOrWhiteSpace(correo) || !correo.Contains("@"))
-            throw new ArgumentException("Correo electrónico inválido");
+            throw new ReglaNegocioException("Correo electrónico inválido");
 
         CorreoElectronico = correo.Trim();
     }

@@ -1,3 +1,4 @@
+using Prueba.Domain.Exceptions;
 namespace Prueba.Domain;
 public class Pais
 {
@@ -12,11 +13,13 @@ public class Pais
         Id = Guid.NewGuid();
     }
 
+  
     public void CambiarNombre(string nombre)
     {
         if (string.IsNullOrWhiteSpace(nombre))
-            throw new ArgumentException("El nombre del país es obligatorio");
+            throw new ReglaNegocioException("El nombre del país es obligatorio");
 
         Nombre = nombre.Trim();
     }
+
 }

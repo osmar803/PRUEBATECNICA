@@ -1,4 +1,5 @@
 // opcional 2 
+using Prueba.Domain.Exceptions;
 namespace Prueba.Domain;
 public class UsuarioAdministrador
 {
@@ -18,7 +19,7 @@ public class UsuarioAdministrador
     private void CambiarUsuario(string usuario)
     {
         if (string.IsNullOrWhiteSpace(usuario))
-            throw new ArgumentException("El usuario es obligatorio");
+            throw new ReglaNegocioException("El usuario es obligatorio");
 
         Usuario = usuario.Trim();
     }
@@ -26,7 +27,7 @@ public class UsuarioAdministrador
     private void CambiarClave(string hash)
     {
         if (string.IsNullOrWhiteSpace(hash))
-            throw new ArgumentException("La clave es obligatoria");
+            throw new ReglaNegocioException("La clave es obligatoria");
 
         ClaveHash = hash;
     }

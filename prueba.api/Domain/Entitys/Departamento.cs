@@ -1,3 +1,4 @@
+using Prueba.Domain.Exceptions;
 namespace Prueba.Domain;
 public class Departamento
 {
@@ -14,10 +15,10 @@ public class Departamento
         Id = Guid.NewGuid();
     }
 
-    public void CambiarNombre(string nombre)
+   public void CambiarNombre(string nombre)
     {
         if (string.IsNullOrWhiteSpace(nombre))
-            throw new ArgumentException("El nombre del departamento es obligatorio");
+            throw new ReglaNegocioException("El nombre del departamento es obligatorio");
 
         Nombre = nombre.Trim();
     }
@@ -25,7 +26,7 @@ public class Departamento
     private void CambiarPais(Guid paisId)
     {
         if (paisId == Guid.Empty)
-            throw new ArgumentException("El país es obligatorio");
+            throw new ReglaNegocioException("El país es obligatorio");
 
         PaisId = paisId;
     }
